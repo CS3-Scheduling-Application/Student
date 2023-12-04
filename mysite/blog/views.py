@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Blog
 from django.http import HttpResponse
 def index(request):
     return render(request, 'index.html')
@@ -10,3 +11,4 @@ def courserequests(request):
     return render(request,'courseRequests.html')
 def courseschedule(request):
     return render(request,'courseSchedule.html')
+
