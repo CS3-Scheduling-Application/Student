@@ -35,8 +35,10 @@
       </div>
     </nav>
 
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit" name="run_script">Run script</button>
-  </form>
+    
+    {% if product %}
+    <div class="product-detail">
+        <pre>{{ product }}</pre>
+    </div>
+    {% endif %}
 </body>
