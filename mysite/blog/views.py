@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
 from django.http import HttpResponse
 from .connect import sqlQuerey
 import sqlite3
@@ -18,38 +17,49 @@ def courseschedule(request):
 def product_detail(request):
     sqliteConnection = sqlite3.connect('C:\\Users\\bharal_909857\\Downloads\\Repository\\Student\\Student\\mysite\\blog\\database.db')
     try:
+        output = []
 
-        output = ""
-        
-       
         cursor = sqliteConnection.cursor()
-        output += 'Connected to DataBase'
 
         query = '''SELECT * FROM TEACHERS'''
         cursor.execute(query)
-        
+
         result = cursor.fetchall()
-        output += 'All the data from Math table:\n'
         for row in result:
-            output += str(row)+'\n'
+            output.append(row)
 
-        output += '\nColumns in TEACHERS table:' 
-        data=cursor.execute('''SELECT Teacher_Name FROM TEACHERS''') 
-        for column in data.description: 
-            output += str(column)+'\n' 
-            
-
-        
         cursor.close()
 
     except sqlite3.Error as error:
         print('Error occurred - ', error)
 
     finally:
-
         if sqliteConnection:
             sqliteConnection.close()
-            print('SQLite Connection closed')
-            product_name="test"
             return render(request, 'courseRequests.html', {'product': output})
-    
+        
+def get_classes(request):
+    sqliteConnection = sqlite3.connect('C:\\Users\\bharal_909857\\Downloads\\Repository\\Student\\Student\\mysite\\blog\\database.db')
+    try:
+        output = []
+
+        cursor = sqliteConnection.cursor()
+
+        query = '''SELECT * FROM MATH'''
+        cursor.execute(query)
+
+        result = cursor.fetchall()
+        for row in result:
+            output.append(row)
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print('Error occurred - ', error)
+
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print('SQLite Connection closed YAY')
+            return render(request, 'courseSchedule.html', {'classes': output})
+

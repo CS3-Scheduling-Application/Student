@@ -7,6 +7,6 @@ urlpatterns = [
     path('bellSchedule', views.bell, name="bell"),
     path('account', views.account, name="account"),
     path('courseSchedule', views.courseschedule, name="courseSchedule"),
-    path('courseRequests', views.product_detail, name="courseRequests"),
-    path('product/', views.product_detail, name='product_detail'),
+    path('courseRequests', views.product_detail, name="product_detail"),
+    path('courseRequests', views.get_classes, name="get_classes"),
 ]
