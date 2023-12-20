@@ -35,19 +35,26 @@
       </div>
     </nav>
 
-    
     {% if product %}
-    <select class="form-select" aria-label="Select a teacher">
-        <option selected disabled>Select a teacher</option>
-        {% for row in product %}
-            <option value="{{ row.0 }}">{{ row.1 }} | {{row.2}} 
-              {% if row.3 != "N/A"%}
-                & {{row.3}}
+      {% for _ in product|slice:":8" %}
+        <select class="form-select w-auto" aria-label="Select a class">
+          <option selected disabled>Select a class</option>
+          {% for row in product %}
+            <option value="{{ row.0 }}">{{ row.1 }}
+              {% if row.2 is not None %} 
+                | {{ row.2 }}
+              {% endif %}   
+              {% if row.3 is not None %}
+                & {{ row.3 }}
               {% endif %}
             </option>
-        {% endfor %}
-    </select>
-  {% endif %}
+          {% endfor %}
+        </select>
+      {% endfor %}
+    {% endif %}
+  
+
+
   <!--
   {% if class %}
     <select class="form-select" aria-label="Select a class">
