@@ -129,128 +129,58 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   </head>
-  <div style="position: fixed; bottom: 0; left: 15%; width: 48%; height: 75%;">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Period</th>
-          <th scope="col">Class</th>
-          <th scope="col">Teacher</th>
-          <th scope="col">Room Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td><var>p1Class</var></td>
-          <td><var>p1Teacher</var></td>
-          <td><var>p1RoomNumber</var></td>
+<div style="position: fixed; bottom: 0; left: 15%; width: 85%; height: 75%;">
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Course Requests</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    </head>
+    <body>
 
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td><var>p2Class</var></td>
-          <td><var>p2Teacher</var></td>
-          <td><var>p2RoomNumber</var></td>
+      {% if product %}
+        {% for _ in product|slice:":8" %}
+          <select class="form-select w-auto" aria-label="Select a class">
+            <option selected disabled>Select a class</option>
+            {% for row in product %}
+              <option value="{{ row.0 }}">{{ row.1 }}
+                {% if row.2 is not None %} 
+                  | {{ row.2 }}
+                {% endif %}   
+                {% if row.3 is not None %}
+                  & {{ row.3 }}
+                {% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        {% endfor %}
+      {% endif %}
+    
 
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td><var>p3Class</var></td>
-          <td><var>p3Teacher</var></td>
-          <td><var>p3RoomNumber</var></td>
 
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td><var>p4Class</var></td>
-          <td><var>p4Teacher</var></td>
-          <td><var>p4RoomNumber</var></td>
-
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td><var>p5Class</var></td>
-          <td><var>p5Teacher</var></td>
-          <td><var>p5RoomNumber</var></td>
-
-        </tr>
-        <tr>
-          <th scope="row">6</th>
-          <td><var>p6Class</var></td>
-          <td><var>p6Teacher</var></td>
-          <td><var>p6RoomNumber</var></td>
-
-        </tr>
-        <tr>
-          <th scope="row">7</th>
-          <td><var>p7Class</var></td>
-          <td><var>p7Teacher</var></td>
-          <td><var>p7RoomNumber</var></td>
-
-        </tr>
-        <tr>
-          <th scope="row">8</th>
-          <td><var>p8Class</var></td>
-          <td><var>p8Teacher</var></td>
-          <td><var>p8RoomNumber</var></td>
-
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <body>
-<<<<<<< HEAD
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="homepage">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="account">Your Account</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="bellSchedule">Bell Schedule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="courseSchedule">Course Schedule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="courseRequests">Course Requests</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    {% if product %}
-      {% for _ in product|slice:":8" %}
-        <select class="form-select w-auto" aria-label="Select a class">
-          <option selected disabled>Select a class</option>
-          {% for row in product %}
-            <option value="{{ row.0 }}">{{ row.1 }}
-              {% if row.2 is not None %} 
-                | {{ row.2 }}
-              {% endif %}   
-              {% if row.3 is not None %}
-                & {{ row.3 }}
-              {% endif %}
-            </option>
+    <!--
+    {% if class %}
+      <select class="form-select" aria-label="Select a class">
+          <option selected disabled>Select a teacher</option>
+          {% for row in class %}
+              <option value="{{ row.0 }}">{{ row.1 }} | {{row.2}} 
+                {% if row.3 != "N/A"%}
+                  & {{row.3}}
+                {% endif %}
+              </option>
           {% endfor %}
-        </select>
-      {% endfor %}
+      </select>
     {% endif %}
-  
+    -->
 
-
-  <!--
-  {% if class %}
+    {% if classes %}
     <select class="form-select" aria-label="Select a class">
-        <option selected disabled>Select a teacher</option>
-        {% for row in class %}
+        <option selected disabled>Select a class</option>
+        {% for row in classes %}
             <option value="{{ row.0 }}">{{ row.1 }} | {{row.2}} 
               {% if row.3 != "N/A"%}
                 & {{row.3}}
@@ -259,23 +189,11 @@
         {% endfor %}
     </select>
   {% endif %}
-  -->
-
-  {% if classes %}
-  <select class="form-select" aria-label="Select a class">
-      <option selected disabled>Select a class</option>
-      {% for row in classes %}
-          <option value="{{ row.0 }}">{{ row.1 }} | {{row.2}} 
-            {% if row.3 != "N/A"%}
-              & {{row.3}}
-            {% endif %}
-          </option>
-      {% endfor %}
-  </select>
-{% endif %}
 
 
 
-=======
->>>>>>> 3b39442 (took out issue with bell schedule but.)
+  </body>
+
+  <body>
+
 </body>
