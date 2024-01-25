@@ -15,7 +15,7 @@ def courseschedule(request):
     return render(request,'courseSchedule.html')
 
 def product_detail(request):
-    sqliteConnection = sqlite3.connect('C:\\Users\\bharal_909857\\Downloads\\Repository\\Student\\Student\\mysite\\blog\\database.db')
+    sqliteConnection = sqlite3.connect('..\\mysite\\blog\\database.db')
     try:
         output = []
 
@@ -127,7 +127,7 @@ def product_detail(request):
             return render(request, 'courseRequests.html', {'product': output})
         
 def get_classes(request):
-    sqliteConnection = sqlite3.connect('C:\\Users\\bharal_909857\\Downloads\\Repository\\Student\\Student\\mysite\\blog\\database.db')
+    sqliteConnection = sqlite3.connect('..\\mysite\\blog\\database.db')
     try:
         output = []
 
