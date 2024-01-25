@@ -1,5 +1,3 @@
-<!doctype html>
-<html lang="en">
 {% load static %}
 <style type="text/css">
   .sidenav {
@@ -69,7 +67,6 @@
   
 </style>
 
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style= "background-color:#5293E3; height: 30px; position: fixed; width: 100%;">
     
     <div class="container-fluid" style= "background-color: #5293E3;">  
@@ -122,7 +119,10 @@
     <button class= "sidebar" href="#">Bell Schedule</button>
   </a>
 </div> 
+<!doctype html>
+<html lang="en">
   <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
     <title>Course Scheduling</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -152,7 +152,30 @@
       {% endif %}
       <button type="button" id="submit_btn" class="btn btn-primary">Submit Requests</button>
   </form>
-
+  
+  <script>
+      $(document).ready(function () {
+          $("#submit_btn").click(function () {
+              // Serialize the form data
+              var formData = $("#ajax_form").serialize();
+  
+              // Send the form data using AJAX
+              $.ajax({
+                  type: "POST",
+                  url: "{% url 'submit_class_requests' %}",
+                  data: formData,
+                  success: function (data) {
+                      // Handle success response
+                      console.log(data);
+                  },
+                  error: function (error) {
+                      // Handle error response
+                      console.error(error);
+                  }
+              });
+          });
+      });
+  </script>
   
   
   
