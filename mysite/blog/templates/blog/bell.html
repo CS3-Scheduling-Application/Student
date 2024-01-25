@@ -1,4 +1,71 @@
 {% load static %}
+<style type="text/css">
+  .sidenav {
+    height:100%;
+    width: 172px;
+    position: fixed;
+    z-index:1;
+    top: 80px;
+    left:0;
+    background-color:#5293E3;
+    overflow-x: hidden;
+    padding-top:30px;
+    margin-top:70px;
+  }
+
+  .sidenav button {
+    padding:6px 8px 6px 16px;
+    text-decoration: none;
+    font-size:25px;
+    display:block;
+  }
+
+  .sidenav button:hover{
+    color:#f1f1f1;
+  }	
+
+  .main{
+    margin-left:160px;
+    padding: 0px 10px;
+  }
+  .sidebar{
+    background-color: #CCCCCC;
+    font-style: oblique;
+    width:172px; 
+  }
+
+</style>
+
+
+
+<style>
+  img {
+    width: 117px;
+    height: 80px;
+  }
+  .custom-drop {
+    list-style: none;
+    background-color: white;
+
+  }
+  
+  .dropdown-menu {
+    border-radius: 0px;
+    position: 40px;
+    width: 50px;
+    background-color: white;
+  }
+  
+  .dropdown-item{
+    text-align: center; 
+    font-size: 15px; 
+    border-radius: 1px;
+    font-style: oblique; 
+    width: 100px;
+  }
+
+  
+</style>
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,59 +76,91 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body style="background-color:#FF2C1E;">
+  <body style="background-color:#5293E3;">
     
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="homepage">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="account">Your Account</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="bellSchedule">Bell Schedule</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="courseSchedule">Course Schedule</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="courseRequests">Course Requests</a>
-              </li>
-            </ul>
-          </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style= "background-color:#5293E3; height: 30px; position: fixed; width: 100%;">
+    
+      <div class="container-fluid" style= "background-color: #5293E3;">  
+        <img src="{% static 'Lion.png' %}" style="height:240px; width:551px;background-color:#5293E3;z-index:1;position: relative;margin-top:90px; margin-right: 80px;" alt="Logo">
+        <h1 class="navbar-brand" style="font-size:50px; color: white; font-style: oblique; z-index:0;position: relative;margin-top:90px;"href="#">Leander High School </h1>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" style= "font-size: 28px; color: white; font-style: oblique;" href="#">{{role}}</a>
+            </li>
+            <li class="nav-item dropdown" style="position: fixed;margin-top:20px; left:1500px;">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style = " background-color: #FF2C1E; width: 180px;
+              height: 50px;z-index:4; text-align: center; font-size: 24px; color: white; font-style: oblique; outline-style: solid; outline-color: black; position: relative; left: 200px;">
+                {{name}}
+              </a>
+              <ul class="dropdown-menu" style="left:210px;" >
+                <li class="dropdown-item">Change Name</li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Change Username</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" >Change Password</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" >Get Admin Code</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      </nav>
-      <div style="width: 907px; margin:auto;">
+      </div>
+    </nav>
+    <div class="sidenav">
+      <a href="courseRequests" style="text-decoration:none">
+        <button class= "sidebar" href="#">Course Requests</button>
+      </a>
+      <a href="courseSchedule" style="text-decoration:none">
+        <button class= "sidebar" href="#">Course Schedule</button>
+      </a>
+      <a href="account" style="text-decoration:none">
+        <button class= "sidebar" href="#">Accounts</button>
+      </a>
+      <a href="bellSchedule" style="text-decoration:none">
+        <button class= "sidebar" href="#">Bell Schedule</button>
+      </a>
+
+    <div style = "">
+    </div> 
+    
+    
+    
+    </div>
+
+    <div style="position: fixed; bottom: 0; left: 25%; width: 48%; height: 89%;">
       <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
-          <button type="button"style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button"style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button"style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          <button type="button"style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" style="filter: invert(100%);" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
         </div>
+        
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="{% static 'bellschedule_norm.png' %}" alt="Normal Bell Schedule">
-
+            <img class="d-block w-100 h-100" src="{% static 'bellschedule_norm.png' %}" alt="Normal Bell Schedule">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="{% static 'bellschedule_pep.png' %}" alt="Pep Rally Bell Schedule">
+            <img class="d-block w-100 h-100" src="{% static 'bellschedule_pep.png' %}" alt="Pep Rally Bell Schedule">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="{% static 'bellschedule_EOS.png' %}" alt="End Of Semester Bell Schedule">
+            <img class="d-block w-100 h-100" src="{% static 'bellschedule_EOS.png' %}" alt="End Of Semester Bell Schedule">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="{% static 'bellschedule_weather_delay.png' %}" alt="End Of Semester Bell Schedule">
+            <img class="d-block w-100 h-100" src="{% static 'bellschedule_weather_delay.png' %}" alt="End Of Semester Bell Schedule">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" style="filter: invert(100%);" aria-hidden="true"></span>
         </button>
-        <button class="carousel-control-next" type="button"  data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
           <span class="carousel-control-next-icon" style="filter: invert(100%);" aria-hidden="true"></span>
         </button>
       </div>
