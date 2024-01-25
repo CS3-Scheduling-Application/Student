@@ -129,58 +129,69 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   </head>
-<div style="position: fixed; bottom: 0; left: 15%; width: 85%; height: 75%;">
-  <!doctype html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Course Requests</title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    </head>
-    <body>
-
-      {% if product %}
-        {% for _ in product|slice:":8" %}
-          <select class="form-select w-auto" aria-label="Select a class">
-            <option selected disabled>Select a class</option>
-            {% for row in product %}
-              <option value="{{ row.0 }}">{{ row.1 }}
-                {% if row.2 is not None %} 
-                  | {{ row.2 }}
-                {% endif %}   
-                {% if row.3 is not None %}
-                  & {{ row.3 }}
-                {% endif %}
-              </option>
-            {% endfor %}
-          </select>
-        {% endfor %}
-      {% endif %}
+  <div style="position: fixed; bottom: 0; left: 15%; width: 48%; height: 75%;">
     
-
-
-    <!--
-    {% if class %}
-      <select class="form-select" aria-label="Select a class">
-          <option selected disabled>Select a teacher</option>
-          {% for row in class %}
-              <option value="{{ row.0 }}">{{ row.1 }} | {{row.2}} 
-                {% if row.3 != "N/A"%}
-                  & {{row.3}}
-                {% endif %}
-              </option>
+    <form id="ajax_form" method="post" name="your_form">
+      {% csrf_token %}
+      {% if product %}
+          {% for _ in product|slice:":11" %}
+              <select class="form-select w-auto" aria-label="Select a class" name="class_select{{ forloop.counter }}">
+                  <option selected disabled>Select a class</option>
+                  {% for row in product %}
+                      <option value="{{ row.0 }}">{{ row.1 }}
+                          {% if row.2 is not None %}
+                              | {{ row.2 }}
+                          {% endif %}
+                          {% if row.3 is not None %}
+                              & {{ row.3 }}
+                          {% endif %}
+                      </option>
+                  {% endfor %}
+              </select>
           {% endfor %}
-      </select>
-    {% endif %}
-    -->
+      {% endif %}
+      <button type="button" id="submit_btn" class="btn btn-primary">Submit Requests</button>
+  </form>
+  
+  <script>
+      $(document).ready(function () {
+          $("#submit_btn").click(function () {
+              // Serialize the form data
+              var formData = $("#ajax_form").serialize();
+  
+              // Send the form data using AJAX
+              $.ajax({
+                  type: "POST",
+                  url: "{% url 'submit_class_requests' %}",
+                  data: formData,
+                  success: function (data) {
+                      // Handle success response
+                      console.log(data);
+                  },
+                  error: function (error) {
+                      // Handle error response
+                      console.error(error);
+                  }
+              });
+          });
+      });
+  </script>
+  
+  
+  
+  
+  </div>
+  <body>
 
-    {% if classes %}
+    
+  
+
+
+  <!--
+  {% if class %}
     <select class="form-select" aria-label="Select a class">
-        <option selected disabled>Select a class</option>
-        {% for row in classes %}
+        <option selected disabled>Select a teacher</option>
+        {% for row in class %}
             <option value="{{ row.0 }}">{{ row.1 }} | {{row.2}} 
               {% if row.3 != "N/A"%}
                 & {{row.3}}
@@ -189,11 +200,10 @@
         {% endfor %}
     </select>
   {% endif %}
+  -->
+
+  
 
 
-
-  </body>
-
-  <body>
 
 </body>
