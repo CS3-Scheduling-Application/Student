@@ -130,36 +130,9 @@ def product_detail(request):
         if sqliteConnection:
             sqliteConnection.close()
             return render(request, 'courseRequests.html', {'product': output})
-        
-def get_classes(request):
-    sqliteConnection = sqlite3.connect('..\\mysite\\blog\\database.db')
-    try:
-        output = []
-
-        cursor = sqliteConnection.cursor()
-
-        query = '''SELECT * FROM MATH'''
-        cursor.execute(query)
-
-        result = cursor.fetchall()
-        for row in result:
-            output.append(row)
-
-        cursor.close()
-
-    except sqlite3.Error as error:
-        print('Error occurred - ', error)
-
-    finally:
-        if sqliteConnection:
-            sqliteConnection.close()
-            print('SQLite Connection closed YAY')
-            return render(request, 'courseSchedule.html', {'classes': output})
 
 def submit_class_requests(request):
     print("HELLO")
-    if request.method != 'POST':
-        raise ContinueResolving
     if request.method == 'POST':
         # Assuming 'class_select1' is the name attribute of your <select> element
         classes= []
