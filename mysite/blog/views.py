@@ -32,7 +32,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'ACC', row[1])
+            new_row = (row[0], 'ACC', 'ACC', row[1])
             output.append(new_row)
         
         
@@ -40,7 +40,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'Athletics', row[1])
+            new_row = (row[0], 'ATH', 'Athletics', row[1])
             output.append(new_row)
         
         
@@ -48,7 +48,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'Electives', row[1])
+            new_row = (row[0], 'CTE', 'Electives', row[1])
             output.append(new_row)
         
         
@@ -56,7 +56,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'English', row[1])
+            new_row = (row[0], 'ENG', 'English', row[1])
             output.append(new_row)
         
         
@@ -64,7 +64,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'English Second Language', row[1])
+            new_row = (row[0], 'ESL', 'English Second Language', row[1])
             output.append(new_row)
         
         
@@ -72,7 +72,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'Fine Arts', row[1])
+            new_row = (row[0], 'FINE_ART', 'Fine Arts', row[1])
             output.append(new_row)
         
         
@@ -80,7 +80,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'Math', row[1])
+            new_row = (row[0], 'MATH', 'Math', row[1])
             output.append(new_row)
         
         
@@ -88,7 +88,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'Science', row[1])
+            new_row = (row[0], 'SCI', 'Science', row[1])
             output.append(new_row)
         
         
@@ -96,7 +96,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'Social Studies', row[1])
+            new_row = (row[0], 'SOCIAL_STUDIES', 'Social Studies', row[1])
             output.append(new_row)
         
         
@@ -104,7 +104,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'Tech', row[1])
+            new_row = (row[0], 'TECH', 'Tech', row[1])
             output.append(new_row)
         
         
@@ -112,7 +112,7 @@ def product_detail(request):
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
-            new_row = (row[0], 'World Languages', row[1])
+            new_row = (row[0], 'WORLD_LANG', 'World Languages', row[1])
             output.append(new_row)
         cursor.close()
         
