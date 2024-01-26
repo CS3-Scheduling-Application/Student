@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .connect import sqlQuerey
+from multiurl import ContinueResolving
 import sqlite3
+import os
 
 
 def index(request):
@@ -14,11 +16,11 @@ def account(request):
 def courseschedule(request):
     return render(request,'courseSchedule.html')
 
+
 def product_detail(request):
-    sqliteConnection = sqlite3.connect('..\\mysite\\blog\\database.db')
+    sqliteConnection = sqlite3.connect('database.db')
     try:
         output = []
-
         cursor = sqliteConnection.cursor()
 
         """
@@ -28,6 +30,9 @@ def product_detail(request):
         for row in teacherResult:
             output.append(row)
         """
+
+
+
         query = '''SELECT * FROM ACC'''
         cursor.execute(query)
         result = cursor.fetchall()
@@ -153,6 +158,8 @@ def get_classes(request):
 
 def submit_class_requests(request):
     print("HELLO")
+    if request.method != 'POST':
+        raise ContinueResolving
     if request.method == 'POST':
         # Assuming 'class_select1' is the name attribute of your <select> element
         classes= []
