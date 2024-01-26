@@ -152,6 +152,7 @@ def get_classes(request):
             return render(request, 'courseSchedule.html', {'classes': output})
 
 def submit_class_requests(request):
+    print("HELLO")
     if request.method == 'POST':
         # Assuming 'class_select1' is the name attribute of your <select> element
         classes= []
@@ -160,7 +161,7 @@ def submit_class_requests(request):
              
 
         # Now 'class_one_value' contains the selected value from the form
-        print(f"Selected value for class_select1: {classes}")
+        print(f"Selected value for classes: {classes}")
 
         # Assuming you need to pass some data to the template, create a context dictionary
         context = {
