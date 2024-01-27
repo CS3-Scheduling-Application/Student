@@ -17,7 +17,7 @@ def courseschedule(request):
     return render(request,'courseSchedule.html')
 
 
-def product_detail(request):
+def get_course_catalog(request):
     sqliteConnection = sqlite3.connect('database.db')
     try:
         output = []
