@@ -137,7 +137,7 @@ def submit_class_requests(request):
         # Assuming 'class_select1' is the name attribute of your <select> element
         classes= []
         for i in range(11):
-            classes.append(request.POST.get('class_select'+str(i+1)))
+            classes.append(request.POST.get('class_select_'+str(i+1)))
              
 
         # Now 'class_one_value' contains the selected value from the form

@@ -138,8 +138,11 @@
       <form method="post" action="{% url 'submit_class_requests' %}" name="your_form">
         {% csrf_token %}
         {% if product %}
+          <div class="d-flex flex-row mb-3">
             {% for _ in product|slice:":11" %}
-                <select class="form-select w-auto" aria-label="Select a class" name="class_select{{ forloop.counter }}" required>
+              {% if forloop.counter == 1 or forloop.counter == 5 or forloop.counter == 9 %} <div class="p-2"> {% endif %}
+                <label for="class_select_{{ forloop.counter }}">{% if forloop.counter <= 8 %}Request #{{ forloop.counter }} {% else %}Alternate Request #{{ forloop.counter|add:'-8' }}{% endif %}</label>
+                <select class="form-select w-auto" aria-label="Select a class" name="class_select_{{ forloop.counter }}" id="class_select_{{ forloop.counter }}" required>
                     <option value="" selected disabled>Select a class</option>
                     {% for row in product %}
                         <option value="{{ row.1 }} {{row.0}}">{{ row.2 }}
@@ -152,7 +155,19 @@
                         </option>
                     {% endfor %}
                 </select>
+                {% if forloop.counter == 11 %} 
+                <div class="d-flex flex-column">
+                  <div>
+                    <label for="input_id">Student Id</label>
+                  </div>
+                  <div>
+                    <input type="number" id="input_id" min="100000" max="999999" placeholder="888888"></input>
+                  </div>
+                </div>
+                {% endif %}
+              {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 11 %} </div> {% endif %}
             {% endfor %}
+          </div>
         {% endif %}
         <button type="submit" id="submit_btn" class="btn btn-primary">Submit Requests</button>
       </form>
