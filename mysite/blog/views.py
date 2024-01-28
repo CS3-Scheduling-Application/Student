@@ -177,8 +177,34 @@ def submit_class_requests(request):
                 sqliteConnection.commit()  # Commit changes to the database
                 sqliteConnection.close()
                 return render(request, 'index.html', context)
+            
 
 
     # Handle other HTTP methods or return a response for GET requests if needed
     # ...
+            
+def view_schedule(request):
+    if request.method == "POST":
+        id = request.POST.get('input_student_id')
+        sqliteConnection = sqlite3.connect('database.db')
+        try:
+            output = []
+            cursor = sqliteConnection.cursor()
+
+            
+            query = "SELECT * FROM STUDENT_REQUESTS WHERE id = " + str(id)
+            cursor.execute(query)
+            queryResult = cursor.fetchall()
+            for row in queryResult:
+                output.append(row)
+            print(output)
+        except sqlite3.Error as error:
+            print('Error occurred - ', error)
+
+    # ...
+
+        finally:
+            if sqliteConnection:
+                sqliteConnection.close()
+                return render(request, 'yourSchedule.html', {'schedule': output})
 
