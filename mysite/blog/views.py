@@ -176,7 +176,7 @@ def submit_class_requests(request):
             if sqliteConnection:
                 sqliteConnection.commit()  # Commit changes to the database
                 sqliteConnection.close()
-                return render(request, 'courseRequests.html', context)
+                return render(request, 'index.html', context)
 
 
     # Handle other HTTP methods or return a response for GET requests if needed
