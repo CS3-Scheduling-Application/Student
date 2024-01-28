@@ -24,7 +24,7 @@ def get_course_catalog(request):
         cursor = sqliteConnection.cursor()
 
         """
-        query = '''SELECT * FROM TEACHERS'''
+        query = "SELECT * FROM TEACHERS"
         cursor.execute(query)
         teacherResult = cursor.fetchall()
         for row in teacherResult:
@@ -33,7 +33,7 @@ def get_course_catalog(request):
 
 
 
-        query = '''SELECT * FROM ACC'''
+        query = "SELECT * FROM ACC"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -41,7 +41,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM ATH'''
+        query = "SELECT * FROM ATH"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -49,7 +49,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM CTE'''
+        query = "SELECT * FROM CTE"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -57,7 +57,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM ENG'''
+        query = "SELECT * FROM ENG"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -65,7 +65,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM ESL'''
+        query = "SELECT * FROM ESL"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -73,7 +73,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM FINE_ART'''
+        query = "SELECT * FROM FINE_ART"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -81,7 +81,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM MATH'''
+        query = "SELECT * FROM MATH"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -89,7 +89,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM SCI'''
+        query = "SELECT * FROM SCI"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -97,7 +97,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM SOCIAL_STUDIES'''
+        query = "SELECT * FROM SOCIAL_STUDIES"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -105,7 +105,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM TECH'''
+        query = "SELECT * FROM TECH"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -113,7 +113,7 @@ def get_course_catalog(request):
             output.append(new_row)
         
         
-        query = '''SELECT * FROM WORLD_LANG'''
+        query = "SELECT * FROM WORLD_LANG"
         cursor.execute(query)
         result = cursor.fetchall()
         for row in result:
@@ -132,25 +132,52 @@ def get_course_catalog(request):
             return render(request, 'courseRequests.html', {'product': output})
 
 def submit_class_requests(request):
-    print("HELLO")
+    context = {}
     if request.method == 'POST':
-        # Assuming 'class_select1' is the name attribute of your <select> element
-        classes= []
-        for i in range(11):
-            classes.append(request.POST.get('class_select_'+str(i+1)))
-             
+        sqliteConnection = sqlite3.connect('database.db')
+        try:
+            cursor = sqliteConnection.cursor()
 
-        # Now 'class_one_value' contains the selected value from the form
-        print(f"Selected value for classes: {classes}")
+            """
+            query = "SELECT * FROM TEACHERS"
+            cursor.execute(query)
+            teacherResult = cursor.fetchall()
+            for row in teacherResult:
+                output.append(row)
+            """
+            classNames = []
+            result = []
+            query = ""
+            classNameResult = ()
+            for i in range(11):
+                result = request.POST.get('class_select_' + str(i+1)).split()
+                query = "SELECT Course_Name FROM " + str(result[0]) + " WHERE ID=" + str(result[1])
+                cursor.execute(query)
+                classNameResult = cursor.fetchall()
+                for row in classNameResult:
+                    classNames.append(row)         
+            
+            query = "REPLACE INTO STUDENT_REQUESTS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            values = [int(request.POST.get('input_student_id'))] + [str(classNames[i])[2:len(str(classNames[i])) - 3] for i in range(11)]
+            cursor.execute(query, values)
 
-        # Assuming you need to pass some data to the template, create a context dictionary
-        context = {
-            'selected_class': classes,
-            # Add other data you want to pass to the template
-        }
+            # Assuming you need to pass some data to the template, create a context dictionary
+            context = {
+                'selected_class': classNames,
+                # Add other data you want to pass to the template
+            }   
 
-        # Render the template with the context
-        return render(request, 'courseRequests.html', context)
+        except sqlite3.Error as error:
+            print('Error occurred - ', error)
+
+        # ...
+
+        finally:
+            if sqliteConnection:
+                sqliteConnection.commit()  # Commit changes to the database
+                sqliteConnection.close()
+                return render(request, 'courseRequests.html', context)
+
 
     # Handle other HTTP methods or return a response for GET requests if needed
     # ...
