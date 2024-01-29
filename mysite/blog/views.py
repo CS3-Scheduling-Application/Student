@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .connect import sqlQuerey
-from multiurl import ContinueResolving
 import sqlite3
 import os
 
