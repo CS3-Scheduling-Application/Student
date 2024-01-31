@@ -1,47 +1,9 @@
-{% load static %}
-<style type="text/css">
-  .sidenav {
-    height:100%;
-    width: 172px;
-    position: fixed;
-    z-index:1;
-    top: 80px;
-    left:0;
-    background-color:#5293E3;
-    overflow-x: hidden;
-    padding-top:30px;
-    margin-top:70px;
-  }
-
-  .sidenav button {
-    padding:6px 8px 6px 16px;
-    text-decoration: none;
-    font-size:25px;
-    display:block;
-  }
-
-  .sidenav button:hover{
-    color:#f1f1f1;
-  }	
-
-  .main{
-    margin-left:160px;
-    padding: 0px 10px;
-  }
-  .sidebar{
-    background-color: #CCCCCC;
-    font-style: oblique;
-    width:172px; 
-  }
-
-</style>
-
 
 
 <style>
   img {
-    width: 117px;
-    height: 80px;
+    width: 9vw; // multiply by 3 to maintain original aspect ratio
+    height: 6vw; // multiply by 2 to maintain original aspect ratio
   }
   .custom-drop {
     list-style: none;
@@ -51,46 +13,57 @@
   
   .dropdown-menu {
     border-radius: 0px;
-    position: 40px;
-    width: 50px;
+    width: 3.3vw;
     background-color: white;
+    margin-right: 90vw;
   }
   
   .dropdown-item{
     text-align: center; 
-    font-size: 15px; 
-    border-radius: 1px;
+    font-size: 1vw; 
+    border-radius: 1vw;
     font-style: oblique; 
-    width: 100px;
+    width: 6.6vw;
+  }
+
+  .dropdownextra{
+    background-color: #FF2C1E; 
+    width: 11.9vw;
+    height: 6.6vh; 
+    text-align: center; 
+    font-size: 1.6vw; 
+    color: white; 
+    font-style: oblique; 
+    outline-style: solid; 
+    outline-color: black;
+    position: absolute; 
+    left: 5vw;
   }
 
   
 </style>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style= "background-color:#5293E3; height: 30px; position: fixed; width: 100%;">
-    
-    <div class="container-fluid" style= "background-color: #5293E3;">  
-      <img src="{% static 'Lion.png' %}" style="height:240px; width:551px;background-color:#5293E3;z-index:1;position: relative;margin-top:90px; margin-right: 80px;" alt="Logo">
-      <h1 class="navbar-brand" style="font-size:50px; color: white; font-style: oblique; z-index:0;position: relative;margin-top:90px;"href="#">Leander High School </h1>
-      
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style= "z-index: 2; background-color:#5293E3; height: 9.8vh; margin: 0; position: fixed; width: 100vw;">
+    <div class="container-fluid" style= "background-color: #5293E3; background-image: url('{% static "sideBar.jpg" %}'); background-size: 210vw 100vh;">
+      <img src="{% static 'Lion.png' %}" alt="My image" style="zoom: 80%; ">
+      <h1 class="navbar-brand" style="font-size:3.4vw; color: white; font-style: oblique; text-shadow: .1vw .1vw 0px #003158; "href="#">Leander High School </h1>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent" >
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" style= "font-size: 28px; color: white; font-style: oblique;" href="#">{{role}}</a>
+            <a class="nav-link active" aria-current="page" style= "font-size: 1.8vw; color: white; font-style: oblique; background-color: transparent; text-shadow: .1vw .1vw 0px #003158;" href="#">{{role}}</a>
           </li>
-          <li class="nav-item dropdown" style="position: fixed;margin-top:20px; left:1500px;">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style = " background-color: #FF2C1E; width: 180px;
-            height: 50px;z-index:4; text-align: center; font-size: 24px; color: white; font-style: oblique; outline-style: solid; outline-color: black; position: relative; left: 200px;">
+          <!-- dropdown  -->
+          <li class="nav-item dropdown" style="position: absolute; left:87vw;">
+            <!-- dropdown main view -->
+            <a class="nav-link dropdown-toggle dropdownextra" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style= "margin-left: 50vw;">
               {{name}}
             </a>
-            <ul class="dropdown-menu" style="left:210px;" >
-              <li class="dropdown-item">Change Name</li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Change Username</a></li>
-              <li><hr class="dropdown-divider"></li>
+            <!--  -->
+            <ul class="dropdown-menu" style = "margin-top:7.3vh; margin-left: 90vw;">
               <li><a class="dropdown-item" href="#" >Change Password</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#" >Get Admin Code</a></li>

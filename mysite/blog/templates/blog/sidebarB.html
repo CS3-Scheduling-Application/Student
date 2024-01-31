@@ -1,23 +1,22 @@
-	{% load static %}
+
 	<style type="text/css">
 		.sidenav {
-			height:100vw;
-			width: 11.3vw;
+			height:100%;
+			width: 172px;
 			position: fixed;
 			z-index:1;
-			top: 9.86vh;
+			top: 80px;
 			left:0;
 			background-color:#5293E3;
-			background-image: url('{% static "sideBar.jpg" %}');
-			background-size: 160vw 90vh;
 			overflow-x: hidden;
-			padding-top:4vh;
+			padding-top:30px;
+			margin-top:70px;
 		}
  
 		.sidenav button {
-			padding:.8vh .5vw .8vh 1.1vw;
+			padding:6px 8px 6px 16px;
 			text-decoration: none;
-			font-size:1.6vw;
+			font-size:25px;
 			display:block;
 		}
  
@@ -26,33 +25,18 @@
 		}	
  
 		.main{
-			margin-left:10.5vw;
-			padding: 0px .7vw;
+			margin-left:160px;
+			padding: 0px 10px;
 		}
 		.sidebar{
-			background-color: transparent;
-			border: none;
-			transition: transform 0.3s;
+			background-color: #CCCCCC;
 			font-style: oblique;
-			width:11.3vw; 
-			height: 14.5vh;
-			
-			border-radius: .5vw;
-		}
-		.sidebar:hover {
-			transform: translateY(-.4vh);
-			box-shadow: 0 .5vh 6px rgba(0, 0, 0, 0.1); // 6px here refers to the blur amount so leave it hard coded to px
-			border: solid;
-		  }
-
-		.sidebar:active {
-			transform: translateY(.1vh);
-			box-shadow: none;
+			width:172px; 
 		}
  
 	</style>
 
-	
+ 
 
 	<div class="sidenav">
 		<a href="courseRequests" style="text-decoration:none">
