@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .connect import sqlQuerey
-from multiurl import ContinueResolving
 import sqlite3
 import os
 
@@ -207,4 +206,27 @@ def view_schedule(request):
             if sqliteConnection:
                 sqliteConnection.close()
                 return render(request, 'yourSchedule.html', {'schedule': output})
+
+def submit_class_requests(request):
+    if request.method == 'POST':
+        # Assuming 'class_select1' is the name attribute of your <select> element
+        classes= []
+        for i in range(11):
+            classes.append(request.POST.get('class_select'+str(i+1)))
+             
+
+        # Now 'class_one_value' contains the selected value from the form
+        print(f"Selected value for class_select1: {classes}")
+
+        # Assuming you need to pass some data to the template, create a context dictionary
+        context = {
+            'selected_class': classes,
+            # Add other data you want to pass to the template
+        }
+
+        # Render the template with the context
+        return render(request, 'courseRequests.html', context)
+
+    # Handle other HTTP methods or return a response for GET requests if needed
+    # ...
 
